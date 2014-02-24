@@ -82,6 +82,7 @@ nnoremap <leader>f :f<cr>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>s. :source %<cr>
 
 nnoremap <leader>o o<esc>k
 nnoremap <leader>oo O<esc>j
@@ -92,9 +93,6 @@ vnoremap ;; <esc>
 vnoremap <esc> <nop>
 
 nnoremap vv V
-
-vnoremap <leader>e y:@"<cr>
-nnoremap <leader>e yy:@"<cr>
 
 inoremap jk <esc>
 inoremap <esc> <nop>
@@ -109,7 +107,32 @@ nnoremap <leader>" viw<esc>a"<esc>bi"<esc>el
 vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>`<lv`>l
 vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>`<lv`>l
 
-nnoremap <leader>h :execute 'help ' . expand('<cword>')<cr>
-vnoremap <leader>h y:execute 'help ' . @"<cr>
-
 nnoremap <leader>nh :nohlsearch<cr>
+
+
+
+" execute texts as vim script:
+" - normal mode: current line
+" - visual mode: selection
+nnoremap <leader>e V:<c-u>call ExecuteVimScript()<cr>
+vnoremap <leader>e  :<c-u>call ExecuteVimScript()<cr>
+function! ExecuteVimScript()
+    let old_reg = @@
+    normal! `<v`>y
+    exec @@
+    let @@ = old_reg
+endfunction
+
+
+
+" open vim help:
+" - normal mode: <cword>
+" - visual mode: selection
+nnoremap <leader>h viw:<c-u>call OpenVimHelp()<cr>
+vnoremap <leader>h    :<c-u>call OpenVimHelp()<cr>
+function! OpenVimHelp()
+    let old_reg = @@
+    normal! `<v`>y
+    help @@
+    let @@ = old_reg
+endfunction
