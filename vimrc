@@ -109,30 +109,26 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>`<lv`>l
 
 nnoremap <leader>nh :nohlsearch<cr>
 
-
-
 " execute texts as vim script:
 " - normal mode: current line
 " - visual mode: selection
-nnoremap <leader>e V:<c-u>call ExecuteVimScript()<cr>
-vnoremap <leader>e  :<c-u>call ExecuteVimScript()<cr>
-function! ExecuteVimScript()
+nnoremap <leader>e V:<c-u>call <SID>ExecuteVimScript()<cr>
+vnoremap <leader>e  :<c-u>call <SID>ExecuteVimScript()<cr>
+function! s:ExecuteVimScript()
     let old_reg = @@
     normal! `<v`>y
-    exec @@
+    execute @@
     let @@ = old_reg
 endfunction
-
-
 
 " open vim help:
 " - normal mode: <cword>
 " - visual mode: selection
-nnoremap <leader>h viw:<c-u>call OpenVimHelp()<cr>
-vnoremap <leader>h    :<c-u>call OpenVimHelp()<cr>
-function! OpenVimHelp()
+nnoremap <leader>h viw:<c-u>call <SID>OpenVimHelp()<cr>
+vnoremap <leader>h    :<c-u>call <SID>OpenVimHelp()<cr>
+function! s:OpenVimHelp()
     let old_reg = @@
     normal! `<v`>y
-    help @@
+    execute 'help' @@
     let @@ = old_reg
 endfunction
