@@ -90,12 +90,12 @@ nnoremap <leader>oo O<esc>j
 cnoremap ;; <c-e><c-u><esc>
 "cnoremap <esc> <nop> " interrupt arrow keys
 vnoremap ;; <esc>
-vnoremap <esc> <nop>
+"vnoremap <esc> <nop>
 
 nnoremap vv V
 
 inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 
 nnoremap ;; :
 nnoremap <leader>q :q<cr>
